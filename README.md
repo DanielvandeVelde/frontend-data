@@ -2,9 +2,9 @@
 A data visualisation (using the d3 library) based on given data where data can be explored through interaction using enter, update, and exit.
 
 ## Ideas
-I've got information about locations. Such as the cities that publishers are located in. I could use those, or the locations of the different OBA holdings.
+I've got information about locations. Such as the cities that publishers are located in. I could use those, or the locations of the different OBA holdings to make a map. I could make a visualization using information about either those locations or the books that are bound to those locations.
 
-There's also a lot of information about different books in there (duh). I could make a scatterplot where I can let the user decide which X and Y values to compare. The values of books that one could compare would be:
+There's also a lot of information about different books in there (duh). I could make a scatterplot where I can let the user decide which X and Y values to compare. The values of the books that one could compare would be:
 
 * Page number
 * Target-audience
