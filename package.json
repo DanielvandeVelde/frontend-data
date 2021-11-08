@@ -1,6 +1,6 @@
 {
   "name": "datavisualisation",
-  "version": "0.1",
+  "version": "1.0.0",
   "description": "datavisualisation",
   "main": "server.js",
   "scripts": {
