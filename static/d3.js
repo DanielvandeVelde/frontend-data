@@ -106,4 +106,4 @@ const getAngleDegrees = (fromX, fromY, toX, toY, force360 = true) => {
 }
 
 svg.call(zoom)
-const interval = window.setInterval(getData, 1500)
+const interval = window.setInterval(getData, 1200) //API allows 1 call every 1000ms
