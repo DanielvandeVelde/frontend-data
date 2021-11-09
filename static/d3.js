@@ -1,27 +1,92 @@
-d3.csv("wikipedia_color_names.csv").then(data => {
-  var svg = d3.select("body").append("svg")
+const width = 960,
+  height = 500
 
-  var circles = svg.selectAll("circle").data(data).enter().append("circle")
-  circles
-    .attr("cx", 15)
-    .attr("cy", (d, i) => {
-      return i * 25 + 15
-    })
-    .attr("r", 10)
-    .attr("fill", d => {
-      return d.hex
-    })
+const projection = d3.geoMercator().center([0, 5]).scale(150)
+const svg = d3.select("svg").attr("width", width).attr("height", height)
+const path = d3.geoPath().projection(projection)
+const g = svg.append("g")
+const g2 = svg.append("g")
+let dataArray = []
 
-  var texts = svg.selectAll("text").data(data).enter().append("text")
-  texts
-    .attr("y", (d, i) => {
-      return i * 25 + 20
-    })
-    .attr("x", 30)
-    .attr("fill", d => {
-      return d.hex
-    })
-    .text(d => {
-      return d.name
-    })
+d3.json("topo.json").then(function (topology) {
+  g.selectAll("path")
+    .data(topojson.feature(topology, topology.objects.countries).features)
+    .enter()
+    .append("path")
+    .attr("d", path)
+    .style("fill", "green")
 })
+
+const getData = () => {
+  fetch("https://api.wheretheiss.at/v1/satellites/25544")
+    .then(response => response.json())
+    .then(data => {
+      //console.log("Information from:" + new Date(data.timestamp * 1000))
+      dataArray.push(data)
+      dataArray.length >= 3 ? dataArray.shift() : null
+      let angle = 0
+      if (dataArray.length > 1) {
+        angle = Number(
+          getAngleDegrees(
+            projection([dataArray[0].longitude, dataArray[0].latitude])[0],
+            projection([dataArray[0].longitude, dataArray[0].latitude])[1],
+            projection([dataArray[1].longitude, dataArray[1].latitude])[0],
+            projection([dataArray[1].longitude, dataArray[1].latitude])[1]
+          ).toFixed(0)
+        )
+        update({ dataArray, angle })
+      } else {
+        update({ dataArray, angle })
+      }
+    })
+}
+
+const update = data => {
+  const text = g2
+    .selectAll("text")
+    .data(data.dataArray)
+    .join(
+      enter =>
+        enter
+          .append("text")
+          .attr("text-anchor", "middle")
+          .attr("dominant-baseline", "central")
+          .attr("x", d => projection([d.longitude, d.latitude])[0])
+          .attr("y", d => projection([d.longitude, d.latitude])[1])
+          .attr("transform", "rotate(" + data.angle + ")")
+          .text("🚀"),
+      update => update,
+      exit => {
+        exit.remove()
+      }
+    )
+
+  text
+
+    .attr("x", d => projection([d.longitude, d.latitude])[0])
+    .attr("y", d => projection([d.longitude, d.latitude])[1])
+    .attr("transform", "rotate(" + data.angle + ")")
+}
+
+const zoom = d3
+  .zoom()
+  .scaleExtent([1, 8])
+  .on("zoom", function (event) {
+    g.selectAll("path").attr("transform", event.transform)
+    g2.selectAll("text").attr("transform", event.transform)
+  })
+
+const getAngleDegrees = (fromX, fromY, toX, toY, force360 = true) => {
+  let deltaX = fromX - toX
+  let deltaY = fromY - toY // reverse
+  let radians = Math.atan2(deltaY, deltaX)
+  let degrees = (radians * 180) / Math.PI - 90 // rotate
+  if (force360) {
+    while (degrees >= 360) degrees -= 360
+    while (degrees < 0) degrees += 360
+  }
+  return degrees
+}
+
+svg.call(zoom)
+const interval = window.setInterval(getData, 1500)
