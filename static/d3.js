@@ -7,6 +7,11 @@ const path = d3.geoPath().projection(projection)
 const g = svg.append("g")
 const g2 = svg.append("g")
 let dataArray = []
+let angle = {
+  angle: 0,
+  long: 0,
+  lat: 0,
+}
 let transform = {
   x: 0,
   y: 0,
@@ -29,17 +34,18 @@ const getData = () => {
       //console.log("Information from:" + new Date(data.timestamp * 1000))
       dataArray.push(data)
       dataArray.length >= 3 ? dataArray.shift() : null
-      let angle = 0
       if (dataArray.length >= 2) {
-        angle = getAngleDegrees(
-          projection([dataArray[0].longitude, dataArray[0].latitude])[0],
-          projection([dataArray[0].longitude, dataArray[0].latitude])[1],
-          projection([dataArray[1].longitude, dataArray[1].latitude])[0],
-          projection([dataArray[1].longitude, dataArray[1].latitude])[1]
-        )
-        update({ dataArray, angle })
-      } else {
-        update({ dataArray, angle })
+        angle = {
+          lat: projection([dataArray[1].longitude, dataArray[1].latitude])[0],
+          long: projection([dataArray[1].longitude, dataArray[1].latitude])[1],
+          angle: getAngleDegrees(
+            projection([dataArray[0].longitude, dataArray[0].latitude])[0],
+            projection([dataArray[0].longitude, dataArray[0].latitude])[1],
+            projection([dataArray[1].longitude, dataArray[1].latitude])[0],
+            projection([dataArray[1].longitude, dataArray[1].latitude])[1]
+          ),
+        }
+        update({ dataArray, angle: angle.angle })
       }
     })
 }
@@ -53,10 +59,7 @@ const update = data => {
         enter
           .append("text")
           .attr("text-anchor", "middle")
-          .attr("dominant-baseline", "central")
-          .attr("x", d => projection([d.longitude, d.latitude])[0])
-          .attr("y", d => projection([d.longitude, d.latitude])[1])
-          .text("🚀"),
+          .attr("dominant-baseline", "central"),
       update => update,
       exit => {
         exit.remove()
@@ -66,6 +69,7 @@ const update = data => {
   text
     .attr("x", d => projection([d.longitude, d.latitude])[0])
     .attr("y", d => projection([d.longitude, d.latitude])[1])
+    .text("🚀")
     .attr("transform", d => {
       return `translate(${transform.x},${transform.y}) scale(${
         transform.k
@@ -83,7 +87,7 @@ const zoom = d3
     g.selectAll("path").attr("transform", transform)
     g2.selectAll("text").attr(
       "transform",
-      `translate(${transform.x},${transform.y}) scale(${transform.k})`
+      `translate(${transform.x},${transform.y}) scale(${transform.k}) rotate(${angle.angle} ${angle.lat} ${angle.long})`
     )
   })
 
