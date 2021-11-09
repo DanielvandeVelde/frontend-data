@@ -25,14 +25,12 @@ const getData = () => {
       dataArray.push(data)
       dataArray.length >= 3 ? dataArray.shift() : null
       let angle = 0
-      if (dataArray.length > 1) {
-        angle = Number(
-          getAngleDegrees(
-            projection([dataArray[0].longitude, dataArray[0].latitude])[0],
-            projection([dataArray[0].longitude, dataArray[0].latitude])[1],
-            projection([dataArray[1].longitude, dataArray[1].latitude])[0],
-            projection([dataArray[1].longitude, dataArray[1].latitude])[1]
-          ).toFixed(0)
+      if (dataArray.length >= 2) {
+        angle = getAngleDegrees(
+          projection([dataArray[0].longitude, dataArray[0].latitude])[0],
+          projection([dataArray[0].longitude, dataArray[0].latitude])[1],
+          projection([dataArray[1].longitude, dataArray[1].latitude])[0],
+          projection([dataArray[1].longitude, dataArray[1].latitude])[1]
         )
         update({ dataArray, angle })
       } else {
@@ -53,7 +51,6 @@ const update = data => {
           .attr("dominant-baseline", "central")
           .attr("x", d => projection([d.longitude, d.latitude])[0])
           .attr("y", d => projection([d.longitude, d.latitude])[1])
-          .attr("transform", "rotate(" + data.angle + ")")
           .text("🚀"),
       update => update,
       exit => {
@@ -62,10 +59,14 @@ const update = data => {
     )
 
   text
-
     .attr("x", d => projection([d.longitude, d.latitude])[0])
     .attr("y", d => projection([d.longitude, d.latitude])[1])
-    .attr("transform", "rotate(" + data.angle + ")")
+    .attr("transform", d => {
+      return `rotate(${data.angle} ${projection([
+        d.longitude,
+        d.latitude,
+      ])[0].toFixed(0)} ${projection([d.longitude, d.latitude])[1].toFixed(0)})`
+    })
 }
 
 const zoom = d3
@@ -85,7 +86,10 @@ const getAngleDegrees = (fromX, fromY, toX, toY, force360 = true) => {
     while (degrees >= 360) degrees -= 360
     while (degrees < 0) degrees += 360
   }
-  return degrees
+  let emojiDegrees = degrees - 45 //offset for 45 degree emoji tilt
+  degreeNumber = emojiDegrees.toFixed(2)
+
+  return degreeNumber
 }
 
 svg.call(zoom)
