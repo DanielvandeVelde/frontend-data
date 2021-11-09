@@ -7,6 +7,11 @@ const path = d3.geoPath().projection(projection)
 const g = svg.append("g")
 const g2 = svg.append("g")
 let dataArray = []
+let transform = {
+  x: 0,
+  y: 0,
+  k: 1,
+}
 
 d3.json("topo.json").then(function (topology) {
   g.selectAll("path")
@@ -62,19 +67,24 @@ const update = data => {
     .attr("x", d => projection([d.longitude, d.latitude])[0])
     .attr("y", d => projection([d.longitude, d.latitude])[1])
     .attr("transform", d => {
-      return `rotate(${data.angle} ${projection([
-        d.longitude,
-        d.latitude,
-      ])[0].toFixed(0)} ${projection([d.longitude, d.latitude])[1].toFixed(0)})`
+      return `translate(${transform.x},${transform.y}) scale(${
+        transform.k
+      }) rotate(${data.angle} ${projection([d.longitude, d.latitude])[0]} ${
+        projection([d.longitude, d.latitude])[1]
+      })`
     })
 }
 
 const zoom = d3
   .zoom()
   .scaleExtent([1, 8])
-  .on("zoom", function (event) {
-    g.selectAll("path").attr("transform", event.transform)
-    g2.selectAll("text").attr("transform", event.transform)
+  .on("zoom", event => {
+    transform = event.transform
+    g.selectAll("path").attr("transform", transform)
+    g2.selectAll("text").attr(
+      "transform",
+      `translate(${transform.x},${transform.y}) scale(${transform.k})`
+    )
   })
 
 const getAngleDegrees = (fromX, fromY, toX, toY, force360 = true) => {
@@ -86,10 +96,9 @@ const getAngleDegrees = (fromX, fromY, toX, toY, force360 = true) => {
     while (degrees >= 360) degrees -= 360
     while (degrees < 0) degrees += 360
   }
-  let emojiDegrees = degrees - 45 //offset for 45 degree emoji tilt
-  degreeNumber = emojiDegrees.toFixed(2)
+  let emojiDegrees = degrees - 45 //offset for 45 degree rocket emoji tilt
 
-  return degreeNumber
+  return emojiDegrees
 }
 
 svg.call(zoom)
