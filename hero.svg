@@ -4,5 +4,5 @@
 <path id="travelPath" d="M42.693696,129.785255C39.86598,272.590784,222.159416,301.123699,227.06079,132.227319C231.962164,-36.669061,368.540855,-31.818564,369.577684,136.278315C370.614513,304.375194,511.906063,351.686313,502.857372,139.515086C493.808681,-72.656141,643.112092,-31.780853,630.952913,145.309524C618.793734,322.399901,746.889277,351.841561,744.438589,148.538632" transform="matrix(1.446432 0 0 1 -92.036311 139.133436)" fill="none"/>
   <text id="map-text1"><textPath id="textPath" xlink:href="#travelPath">
 🚀
-<animate attributeName="startOffset" from="0%" to="175%" begin="0s" dur="10s" repeatCount="indefinite"/></textPath></text>
+<animate attributeName="startOffset" from="0%" to="200%" begin="0s" dur="10s" repeatCount="indefinite"/></textPath></text>
   </g></svg>
