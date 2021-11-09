@@ -1,6 +1,6 @@
 # frontend-data
 
-<kbd>![Site image](https://raw.githubusercontent.com/DanielvandeVelde/frontend-data/master/hero.png "Site image")</kbd>
+<kbd>![Site image](https://raw.githubusercontent.com/DanielvandeVelde/frontend-data/master/hero.svg "Site image")</kbd>
 
 A live version of this fully responsive application is running [here](https://datafish.herokuapp.com/)  
 I suggest checking out the [Wiki](https://github.com/DanielvandeVelde/frontend-data/wiki) for information on the process.
