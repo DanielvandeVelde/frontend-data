@@ -1,32 +1,40 @@
 # frontend-data
-D3 visualisations in 2 weeks
 
-<!--
+<kbd>![Site image](https://raw.githubusercontent.com/DanielvandeVelde/frontend-data/master/hero.png "Site image")</kbd>
 
-<kbd>![Site image](https://raw.githubusercontent.com/DanielvandeVelde/frontend-data/master/docs/hero.png "Site image")</kbd>
-
-
-A live version of this fully responsive application is running [here](https://where.com/)  
-I suggest checking out the [Wiki](https://github.com/DanielvandeVelde/frontend-data/wiki) for information on the process. 
-
---> 
+A live version of this fully responsive application is running [here](https://datafish.herokuapp.com/)  
+I suggest checking out the [Wiki](https://github.com/DanielvandeVelde/frontend-data/wiki) for information on the process.
 
 ## ✅ To-do
+
 - [x] Create wiki
-- [ ] Set-up the project
-- [ ] Add in D3
-- [ ] Figure out what to do???
+- [x] Set-up the project
+- [x] Add in D3
+- [x] Figure out what to do???
+- [x] Create API connection
+- [x] Display API data in D3
+- [x] Create GeoJSON
+- [x] Display path of ISS on a map
+- [x] Drag and zoom
+- [ ] Refactor a lot of code
+- [ ] Remove global variables
+- [ ] Create modules
+- [ ] Type something about the data I'm using
+- [ ] Update the resources part of the readme
+- [ ] Write more in my wiki
 
 ## 📋 Concept
+
 I'm going to show a data visualisation and it's going to be awesome.
 
-<!--
-
 ## ⚙️ Installation
+
 Clone this repository to your own device:
+
 ```bash
 $ git clone https://github.com/DanielvandeVelde/frontend-data.git
 ```
+
 Then, navigate to this folder and run:
 
 ```bash
@@ -40,9 +48,8 @@ npm start
 ```
 
 ## 🗃 Data
-What kind of data we talking here?
 
--->
+What kind of data we talking here?
 
 ## ℹ️ Resources
 
@@ -50,9 +57,9 @@ What kind of data we talking here?
 
 ## 🗺️ License
 
-Author: 
-- [Daniel van de Velde](https://github.com/DanielvandeVelde) 
+Author:
 
+- [Daniel van de Velde](https://github.com/DanielvandeVelde)
 
 License by
 [MIT](https://opensource.org/licenses/MIT)
