@@ -66,6 +66,10 @@ svg:hover {
   cursor: grab;
 }
 
+svg text {
+  cursor: none;
+}
+
 svg:active {
   cursor: grabbing;
 }
