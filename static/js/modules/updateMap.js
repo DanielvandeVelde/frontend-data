@@ -49,12 +49,12 @@ export let update = {
       })
   },
   information: data => {
-    var arr = Object.keys(data).map(key => ({ [key]: data[key] }))
+    const dataArray = Object.keys(data).map(key => ({ [key]: data[key] }))
     const g3 = d3.select("#group3")
 
     const information = g3
       .selectAll("text")
-      .data(arr)
+      .data(dataArray)
       .join(
         enter =>
           enter
