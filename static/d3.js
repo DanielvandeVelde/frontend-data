@@ -1,9 +1,6 @@
-const width = 1160,
-  height = 500
-
 const projection = d3.geoMercator().center([0, 5]).scale(150)
-const svg = d3.select("svg").attr("width", width).attr("height", height)
 const path = d3.geoPath().projection(projection)
+const svg = d3.select("svg").attr("width", 1160).attr("height", 500)
 const g = svg.append("g")
 const g2 = svg.append("g")
 const g3 = svg.append("g")
@@ -62,6 +59,7 @@ const getData = () => {
             projection([dataArray[1].longitude, dataArray[1].latitude])[1]
           ),
         }
+
         updateRocket({ dataArray, angle: angle.angle })
         updateInformation(dataArray[1])
       }
