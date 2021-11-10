@@ -31,7 +31,7 @@ g.append("rect")
   .attr("fill", "steelblue")
   .attr("opacity", "1")
 
-d3.json("topo.json").then(function (topology) {
+d3.json("data/topo.json").then(function (topology) {
   g.selectAll("path")
     .data(topojson.feature(topology, topology.objects.countries).features)
     .enter()
