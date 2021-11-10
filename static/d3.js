@@ -7,12 +7,12 @@ const path = d3.geoPath().projection(projection)
 const g = svg.append("g")
 const g2 = svg.append("g")
 let dataArray = []
-const angle = {
+let angle = {
   angle: 0,
   long: 0,
   lat: 0,
 }
-const transform = {
+let transform = {
   x: 0,
   y: 0,
   k: 1,
