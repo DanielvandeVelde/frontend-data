@@ -49,11 +49,42 @@ npm start
 
 ## 🗃 Data
 
-What kind of data we talking here?
+I'm using data that tells me the position of the ISS.  
+The [documentation can be found here](https://wheretheiss.at/w/developer).
+There's a ratelimit of roughly 1 request per second and I'm polling it once every 1200ms.
+
+With various endpoints to get all the sattelites this API has, positions of those sattelites , TLE data and even one to get the countrycode, timezone and current time when giving it a latitude and longitude.
+
+I am only using the `/sattelites/[id]` endpoint.  
+For the ISS that url looks like this: `https://api.wheretheiss.at/v1/satellites/25544`
+
+<details>
+<summary>Example response</summary>
+
+```json
+{
+  "name": "iss",
+  "id": 25544,
+  "latitude": 50.11496269845,
+  "longitude": 118.07900427317,
+  "altitude": 408.05526028199,
+  "velocity": 27635.971970874,
+  "visibility": "daylight",
+  "footprint": 4446.1877699772,
+  "timestamp": 1364069476,
+  "daynum": 2456375.3411574,
+  "solar_lat": 1.3327003598631,
+  "solar_lon": 238.78610691196,
+  "units": "kilometers"
+}
+```
+
+</details>
 
 ## ℹ️ Resources
 
 - [CMD-TT FD course](https://github.com/cmda-tt/course-21-22/tree/main/fd)
+- [Where the ISS at?](https://wheretheiss.at/w/developer)
 
 ## 🗺️ License
 
