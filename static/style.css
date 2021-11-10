@@ -18,6 +18,16 @@ main {
   margin: 1em;
 }
 
+body::after {
+  position: absolute;
+  z-index: -1;
+  bottom: 0;
+  right: 0;
+  content: "🚀";
+  font-size: 5000%;
+  opacity: 0.25;
+}
+
 h1 {
   padding-top: 0;
   margin: 0;
