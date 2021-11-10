@@ -62,6 +62,14 @@ footer {
   width: 100%;
 }
 
+svg:hover {
+  cursor: grab;
+}
+
+svg:active {
+  cursor: grabbing;
+}
+
 footer > a {
   color: #aaa;
 }
