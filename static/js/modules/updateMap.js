@@ -19,11 +19,11 @@ export let update = {
     //And does it really sort of work?
     angle = {
       angle: data.angle,
-      x: projection([
+      long: projection([
         data.dataArray[1].longitude,
         data.dataArray[1].latitude,
       ])[0],
-      y: projection([
+      lat: projection([
         data.dataArray[1].longitude,
         data.dataArray[1].latitude,
       ])[1],
