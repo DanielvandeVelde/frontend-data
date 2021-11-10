@@ -1,4 +1,4 @@
-const width = 960,
+const width = 1160,
   height = 500
 
 const projection = d3.geoMercator().center([0, 5]).scale(150)
@@ -6,6 +6,7 @@ const svg = d3.select("svg").attr("width", width).attr("height", height)
 const path = d3.geoPath().projection(projection)
 const g = svg.append("g")
 const g2 = svg.append("g")
+const g3 = svg.append("g")
 let dataArray = []
 let angle = {
   angle: 0,
@@ -18,6 +19,14 @@ let transform = {
   k: 1,
 }
 
+//Make this a nice little function?
+g3.append("rect")
+  .attr("width", "200")
+  .attr("height", "500")
+  .attr("fill", "white")
+  .attr("opacity", "0.75")
+  .attr("x", "960")
+
 d3.json("topo.json").then(function (topology) {
   g.selectAll("path")
     .data(topojson.feature(topology, topology.objects.countries).features)
@@ -25,13 +34,14 @@ d3.json("topo.json").then(function (topology) {
     .append("path")
     .attr("d", path)
     .style("fill", "green")
+    .style("stroke", "black")
+    .style("stroke-width", "1")
 })
 
 const getData = () => {
   fetch("https://api.wheretheiss.at/v1/satellites/25544")
     .then(response => response.json())
     .then(data => {
-      //console.log("Information from:" + new Date(data.timestamp * 1000))
       dataArray.push(data)
       dataArray.length >= 3 ? dataArray.shift() : null
       if (dataArray.length >= 2) {
@@ -45,13 +55,14 @@ const getData = () => {
             projection([dataArray[1].longitude, dataArray[1].latitude])[1]
           ),
         }
-        update({ dataArray, angle: angle.angle })
+        updateRocket({ dataArray, angle: angle.angle })
+        updateInformation(dataArray[1])
       }
     })
 }
 
-const update = data => {
-  const text = g2
+const updateRocket = data => {
+  const rocket = g2
     .selectAll("text")
     .data(data.dataArray)
     .join(
@@ -66,7 +77,7 @@ const update = data => {
       }
     )
 
-  text
+  rocket
     .attr("x", d => projection([d.longitude, d.latitude])[0])
     .attr("y", d => projection([d.longitude, d.latitude])[1])
     .text("🚀")
@@ -77,6 +88,29 @@ const update = data => {
         projection([d.longitude, d.latitude])[1]
       })`
     })
+}
+
+const updateInformation = data => {
+  //Datacleaning needs its own function, maybe
+  var arr = Object.keys(data).map(key => ({ [key]: data[key] }))
+
+  const information = g3
+    .selectAll("text")
+    .data(arr)
+    .join(
+      enter =>
+        enter
+          .append("text")
+          .attr("x", "965")
+          .attr("y", (d, i) => i * 25 + 25)
+          .text(d => `${Object.keys(d)[0]}: ${d[Object.keys(d)[0]]}`),
+      update => update,
+      exit => {
+        exit.remove()
+      }
+    )
+
+  information.text(d => `${Object.keys(d)[0]}: ${d[Object.keys(d)[0]]}`)
 }
 
 const zoom = d3
