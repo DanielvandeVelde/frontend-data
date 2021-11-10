@@ -1,4 +1,3 @@
-const projection = d3.geoMercator().center([0, 5]).scale(150)
 const svg = d3.select("svg")
 let angle = {
   angle: 0,
@@ -14,6 +13,21 @@ let transform = {
 export let update = {
   rocket: data => {
     const g2 = d3.select("#group2")
+    const projection = d3.geoMercator().center([0, 5]).scale(150)
+
+    //Do I really want to save the angle?
+    //And does it really sort of work?
+    angle = {
+      angle: data.angle,
+      x: projection([
+        data.dataArray[1].longitude,
+        data.dataArray[1].latitude,
+      ])[0],
+      y: projection([
+        data.dataArray[1].longitude,
+        data.dataArray[1].latitude,
+      ])[1],
+    }
 
     const rocket = g2
       .selectAll("text")
@@ -81,7 +95,7 @@ export let update = {
           .selectAll("text")
           .attr(
             "transform",
-            `translate(${transform.x},${transform.y}) scale(${transform.k}) rotate(${angle.angle} ${angle.lat} ${angle.long})`
+            `translate(${transform.x},${transform.y}) scale(${transform.k}) rotate(0 0 0)`
           )
       }),
 }
