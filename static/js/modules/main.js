@@ -18,7 +18,6 @@ const createMap = () => {
     .attr("y", "-250")
     .attr("height", "1000")
     .attr("fill", "steelblue")
-    .attr("opacity", "1")
 
   d3.json("data/topo.json").then(function (topology) {
     g.selectAll("path")
@@ -31,7 +30,6 @@ const createMap = () => {
       )
       .style("fill", "green")
       .style("stroke", "black")
-      .style("stroke-width", "1")
   })
 }
 
