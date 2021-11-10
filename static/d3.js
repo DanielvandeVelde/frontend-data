@@ -27,6 +27,13 @@ g3.append("rect")
   .attr("opacity", "0.75")
   .attr("x", "960")
 
+g.append("rect")
+  .attr("width", "960")
+  .attr("y", "-250")
+  .attr("height", "1000")
+  .attr("fill", "steelblue")
+  .attr("opacity", "1")
+
 d3.json("topo.json").then(function (topology) {
   g.selectAll("path")
     .data(topojson.feature(topology, topology.objects.countries).features)
@@ -118,7 +125,7 @@ const zoom = d3
   .scaleExtent([1, 8])
   .on("zoom", event => {
     transform = event.transform
-    g.selectAll("path").attr("transform", transform)
+    g.attr("transform", transform)
     g2.selectAll("text").attr(
       "transform",
       `translate(${transform.x},${transform.y}) scale(${transform.k}) rotate(${angle.angle} ${angle.lat} ${angle.long})`
