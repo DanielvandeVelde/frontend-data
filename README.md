@@ -86,6 +86,7 @@ For the ISS that url looks like this: `https://api.wheretheiss.at/v1/satellites/
 - [CMD-TT FD course](https://github.com/cmda-tt/course-21-22/tree/main/fd)
 - [Where the ISS at?](https://wheretheiss.at/w/developer)
 - [🚀 Angle calculation](https://stackoverflow.com/a/59906056)
+- [Favicon](https://favicon.io/emoji-favicons/rocket/)
 
 ## 🗺️ License
 
