@@ -4,6 +4,10 @@ let angle = {
   long: 0,
   lat: 0,
 }
+//saving angle and transform here as globals
+//could also grab this from the elements themselves?
+//don't know whats better
+//Also, const svg for the zoom could just be d3.select, but no time now kek
 let transform = {
   x: 0,
   y: 0,
@@ -15,8 +19,6 @@ export let update = {
     const g2 = d3.select("#group2")
     const projection = d3.geoMercator().center([0, 5]).scale(150)
 
-    //Do I really want to save the angle?
-    //And does it really sort of work?
     angle = {
       angle: data.angle,
       long: projection([
@@ -95,7 +97,7 @@ export let update = {
           .selectAll("text")
           .attr(
             "transform",
-            `translate(${transform.x},${transform.y}) scale(${transform.k}) rotate(0 0 0)`
+            `translate(${transform.x},${transform.y}) scale(${transform.k}) rotate(${angle.angle} ${angle.long} ${angle.lat})`
           )
       }),
 }
