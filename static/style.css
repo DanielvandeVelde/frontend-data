@@ -14,6 +14,8 @@ svg {
   background-color: steelblue;
   border-radius: 2em;
   margin: 1em;
+  width: 100%;
+  max-width: 1160;
 }
 
 ul {
