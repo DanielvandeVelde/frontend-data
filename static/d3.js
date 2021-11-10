@@ -75,7 +75,14 @@ const updateRocket = data => {
         enter
           .append("text")
           .attr("text-anchor", "middle")
-          .attr("dominant-baseline", "central"),
+          .attr("dominant-baseline", "central")
+          .text("🚀")
+          .on("mouseover", function () {
+            d3.select(this).text("🐱")
+          })
+          .on("mouseout", function () {
+            d3.select(this).text("🚀")
+          }),
       update => update,
       exit => {
         exit.remove()
@@ -85,7 +92,6 @@ const updateRocket = data => {
   rocket
     .attr("x", d => projection([d.longitude, d.latitude])[0])
     .attr("y", d => projection([d.longitude, d.latitude])[1])
-    .text("🚀")
     .attr("transform", d => {
       return `translate(${transform.x},${transform.y}) scale(${
         transform.k
