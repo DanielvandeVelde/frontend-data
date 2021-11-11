@@ -1,4 +1,3 @@
-const svg = d3.select("svg")
 let angle = {
   angle: 0,
   long: 0,
@@ -7,7 +6,6 @@ let angle = {
 //saving angle and transform here as globals
 //could also grab this from the elements themselves?
 //don't know whats better
-//Also, const svg for the zoom could just be d3.select, but no time now kek
 let transform = {
   x: 0,
   y: 0,
@@ -102,4 +100,4 @@ export let update = {
       }),
 }
 
-svg.call(update.zoom())
+d3.select("svg").call(update.zoom())
