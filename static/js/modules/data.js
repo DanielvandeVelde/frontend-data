@@ -1,5 +1,5 @@
 import { update } from "./updateMap.js"
-let dataArray = []
+const dataArray = []
 
 export let data = {
   cleanData: rawData => {
