@@ -52,8 +52,6 @@ export let update = {
       )
 
     rocket
-      .attr("x", d => projection([d.longitude, d.latitude])[0])
-      .attr("y", d => projection([d.longitude, d.latitude])[1])
       .attr("transform", d => {
         return `translate(${transform.x},${transform.y}) scale(${
           transform.k
@@ -61,6 +59,10 @@ export let update = {
           projection([d.longitude, d.latitude])[1]
         })`
       })
+      .transition()
+      .duration(1200)
+      .attr("x", d => projection([d.longitude, d.latitude])[0])
+      .attr("y", d => projection([d.longitude, d.latitude])[1])
   },
   information: data => {
     const dataArray = Object.keys(data).map(key => ({ [key]: data[key] }))
