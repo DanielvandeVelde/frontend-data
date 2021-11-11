@@ -1,5 +1,4 @@
 import { api } from "./api.js"
-
 ;(() => {
   const svg = d3.select("svg").attr("width", 1160).attr("height", 500)
   const g = svg.append("g").attr("id", "group1")
