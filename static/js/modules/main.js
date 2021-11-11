@@ -1,23 +1,25 @@
 import { api } from "./api.js"
 
-const createMap = () => {
+;(() => {
   const svg = d3.select("svg").attr("width", 1160).attr("height", 500)
   const g = svg.append("g").attr("id", "group1")
   svg.append("g").attr("id", "group2")
   const g3 = svg.append("g").attr("id", "group3")
 
+  //ocean
+  g.append("rect")
+    .attr("width", "960")
+    .attr("y", "-250")
+    .attr("height", "1000")
+    .attr("fill", "steelblue")
+
+  //background for API dump text
   g3.append("rect")
     .attr("width", "200")
     .attr("height", "500")
     .attr("fill", "white")
     .attr("opacity", "0.75")
     .attr("x", "960")
-
-  g.append("rect")
-    .attr("width", "960")
-    .attr("y", "-250")
-    .attr("height", "1000")
-    .attr("fill", "steelblue")
 
   d3.json("data/topo.json").then(function (topology) {
     g.selectAll("path")
@@ -31,7 +33,6 @@ const createMap = () => {
       .style("fill", "green")
       .style("stroke", "black")
   })
-}
+})()
 
 window.setInterval(api.fetch, 1200)
-createMap()
