@@ -52,6 +52,9 @@ export let update = {
       )
 
     rocket
+      .style("opacity", (d, i) => i)
+      .transition()
+      .duration(1200)
       .attr("transform", d => {
         return `translate(${transform.x},${transform.y}) scale(${
           transform.k
@@ -59,10 +62,8 @@ export let update = {
           projection([d.longitude, d.latitude])[1]
         })`
       })
-      .transition()
-      .duration(1200)
-      .attr("x", d => projection([d.longitude, d.latitude])[0])
       .attr("y", d => projection([d.longitude, d.latitude])[1])
+      .attr("x", d => projection([d.longitude, d.latitude])[0])
   },
   information: data => {
     const dataArray = Object.keys(data).map(key => ({ [key]: data[key] }))
@@ -94,6 +95,8 @@ export let update = {
         transform = event.transform
         d3.select("#group1").attr("transform", transform)
         d3.select("#group2")
+          .transition()
+          .duration(0)
           .selectAll("text")
           .attr(
             "transform",
