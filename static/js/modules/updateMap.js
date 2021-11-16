@@ -91,7 +91,9 @@ export let update = {
           .selectAll("text")
           .attr(
             "transform",
-            `translate(${transform.x},${transform.y}) scale(${transform.k}) rotate(${angle.angle} ${angle.long} ${angle.lat})`
+            `translate(${transform.x},${transform.y}) 
+            scale(${transform.k}) 
+            rotate(${angle.angle} ${angle.long} ${angle.lat})`
           )
       }),
 }
