@@ -5,14 +5,12 @@ import { api } from "./api.js"
   svg.append("g").attr("id", "group2")
   const g3 = svg.append("g").attr("id", "group3")
 
-  //ocean
   g.append("rect")
     .attr("width", "960")
     .attr("y", "-250")
     .attr("height", "1000")
     .attr("fill", "steelblue")
 
-  //background for API dump text
   g3.append("rect")
     .attr("width", "200")
     .attr("height", "500")
@@ -20,7 +18,7 @@ import { api } from "./api.js"
     .attr("opacity", "0.75")
     .attr("x", "960")
 
-  d3.json("data/topo.json").then(function (topology) {
+  d3.json("data/topo.json").then(topology => {
     g.selectAll("path")
       .data(topojson.feature(topology, topology.objects.countries).features)
       .enter()
