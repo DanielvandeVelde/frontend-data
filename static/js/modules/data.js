@@ -26,12 +26,11 @@ export let data = {
   },
   getAngleDegrees: (fromX, fromY, toX, toY, force360 = true) => {
     let deltaX = fromX - toX
-    let deltaY = fromY - toY // reverse
+    let deltaY = fromY - toY
     let radians = Math.atan2(deltaY, deltaX)
     let degrees = (radians * 180) / Math.PI - 90 // rotate
     if (force360) {
-      while (degrees >= 360) degrees -= 360
-      while (degrees < 0) degrees += 360
+      degrees = (degrees + 360) % 360
     }
     let emojiDegrees = degrees - 45 //offset for 45 degree rocket emoji tilt
 
