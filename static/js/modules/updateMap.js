@@ -57,9 +57,7 @@ export let update = {
             })
             .attr("y", d => projection([d.longitude, d.latitude])[1])
             .attr("x", d => projection([d.longitude, d.latitude])[0]),
-        exit => {
-          exit.remove()
-        }
+        exit => exit.remove()
       )
   },
   information: data => {
@@ -77,9 +75,7 @@ export let update = {
             .text(d => `${Object.keys(d)[0]}: ${d[Object.keys(d)[0]]}`),
         update =>
           update.text(d => `${Object.keys(d)[0]}: ${d[Object.keys(d)[0]]}`),
-        exit => {
-          exit.remove()
-        }
+        exit => exit.remove()
       )
   },
   zoom: () =>
