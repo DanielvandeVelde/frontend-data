@@ -16,12 +16,12 @@ I suggest checking out the [Wiki](https://github.com/DanielvandeVelde/frontend-d
 - [x] Create GeoJSON
 - [x] Display path of ISS on a map
 - [x] Drag and zoom
-- [ ] Refactor a lot of code
-- [ ] Remove global variables
-- [ ] Create modules
-- [ ] Type something about the data I'm using
-- [ ] Update the resources part of the readme
-- [ ] Write more in my wiki
+- [x] Refactor a lot of code
+- [x] Remove global variables
+- [x] Create modules
+- [x] Type something about the data I'm using
+- [x] Update the resources part of the readme
+- [x] Write more in my wiki
 
 ## 📋 Concept
 
