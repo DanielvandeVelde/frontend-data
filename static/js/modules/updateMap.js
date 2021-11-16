@@ -31,7 +31,7 @@ export let update = {
 
     const rocket = g2
       .selectAll("text")
-      .data(data.dataArray)
+      .data([data.dataArray[0]])
       .join(
         enter =>
           enter
@@ -52,7 +52,6 @@ export let update = {
       )
 
     rocket
-      .style("opacity", (d, i) => i)
       .transition()
       .duration(1200)
       .attr("transform", d => {
