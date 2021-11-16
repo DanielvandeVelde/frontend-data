@@ -14,7 +14,6 @@ let transform = {
 
 export let update = {
   rocket: data => {
-    const g2 = d3.select("#group2")
     const projection = d3.geoMercator().center([0, 5]).scale(150)
 
     angle = {
@@ -29,7 +28,7 @@ export let update = {
       ])[1],
     }
 
-    const rocket = g2
+    d3.select("#group2")
       .selectAll("text")
       .data([data.dataArray[0]])
       .join(
@@ -45,30 +44,28 @@ export let update = {
             .on("mouseout", function () {
               d3.select(this).text("🚀")
             }),
-        update => update,
+        update =>
+          update
+            .transition()
+            .duration(1200)
+            .attr("transform", d => {
+              return `translate(${transform.x},${transform.y}) scale(${
+                transform.k
+              }) rotate(${data.angle} ${
+                projection([d.longitude, d.latitude])[0]
+              } ${projection([d.longitude, d.latitude])[1]})`
+            })
+            .attr("y", d => projection([d.longitude, d.latitude])[1])
+            .attr("x", d => projection([d.longitude, d.latitude])[0]),
         exit => {
           exit.remove()
         }
       )
-
-    rocket
-      .transition()
-      .duration(1200)
-      .attr("transform", d => {
-        return `translate(${transform.x},${transform.y}) scale(${
-          transform.k
-        }) rotate(${data.angle} ${projection([d.longitude, d.latitude])[0]} ${
-          projection([d.longitude, d.latitude])[1]
-        })`
-      })
-      .attr("y", d => projection([d.longitude, d.latitude])[1])
-      .attr("x", d => projection([d.longitude, d.latitude])[0])
   },
   information: data => {
     const dataArray = Object.keys(data).map(key => ({ [key]: data[key] }))
-    const g3 = d3.select("#group3")
 
-    const information = g3
+    d3.select("#group3")
       .selectAll("text")
       .data(dataArray)
       .join(
@@ -78,13 +75,12 @@ export let update = {
             .attr("x", "965")
             .attr("y", (d, i) => i * 25 + 25)
             .text(d => `${Object.keys(d)[0]}: ${d[Object.keys(d)[0]]}`),
-        update => update,
+        update =>
+          update.text(d => `${Object.keys(d)[0]}: ${d[Object.keys(d)[0]]}`),
         exit => {
           exit.remove()
         }
       )
-
-    information.text(d => `${Object.keys(d)[0]}: ${d[Object.keys(d)[0]]}`)
   },
   zoom: () =>
     d3
