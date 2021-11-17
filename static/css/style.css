@@ -70,6 +70,10 @@ svg #group2 text {
   cursor: none;
 }
 
+svg #group3 text {
+  text-transform: capitalize;
+}
+
 svg:active {
   cursor: grabbing;
 }
