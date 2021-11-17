@@ -22,6 +22,7 @@ I suggest checking out the [Wiki](https://github.com/DanielvandeVelde/frontend-d
 - [x] Type something about the data I'm using
 - [x] Update the resources part of the readme
 - [x] Write more in my wiki
+- [x] Refactor some more
 
 ## 📋 Concept
 
