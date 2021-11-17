@@ -20,8 +20,8 @@ export let data = {
         ),
       }
 
-      const informationData = Object.keys(dataArray[1]).map(key => ({
-        [key]: data[key],
+      const informationData = Object.keys(dataArray[0]).map(key => ({
+        [key]: dataArray[0][key],
       }))
 
       update.rocket({ dataArray, angle: angle.angle })
