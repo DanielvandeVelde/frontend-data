@@ -9,14 +9,14 @@ import { api } from "./api.js"
     .attr("width", "960")
     .attr("y", "-250")
     .attr("height", "1000")
-    .attr("fill", "steelblue")
+    .style("fill", "steelblue")
 
   g3.append("rect")
     .attr("width", "200")
     .attr("height", "500")
-    .attr("fill", "white")
-    .attr("opacity", "0.75")
     .attr("x", "960")
+    .style("fill", "white")
+    .style("opacity", "0.75")
 
   d3.json("data/topo.json").then(topology => {
     g.selectAll("path")
