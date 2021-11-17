@@ -20,8 +20,12 @@ export let data = {
         ),
       }
 
+      const informationData = Object.keys(dataArray[1]).map(key => ({
+        [key]: data[key],
+      }))
+
       update.rocket({ dataArray, angle: angle.angle })
-      update.information(dataArray[1])
+      update.information(informationData)
     }
   },
   getAngleDegrees: (fromX, fromY, toX, toY, force360 = true) => {

@@ -30,7 +30,7 @@ export let update = {
 
     d3.select("#group2")
       .selectAll("text")
-      .data([data.dataArray[0]])
+      .data([data.dataArray[1]])
       .join(
         enter =>
           enter
@@ -61,17 +61,15 @@ export let update = {
       )
   },
   information: data => {
-    const dataArray = Object.keys(data).map(key => ({ [key]: data[key] }))
-
     d3.select("#group3")
       .selectAll("text")
-      .data(dataArray)
+      .data(data)
       .join(
         enter =>
           enter
             .append("text")
             .attr("x", "965")
-            .attr("y", (d, i) => i * 25 + 25)
+            .attr("y", (d, i) => i * 38 + 24)
             .text(d => `${Object.keys(d)[0]}: ${d[Object.keys(d)[0]]}`),
         update =>
           update.text(d => `${Object.keys(d)[0]}: ${d[Object.keys(d)[0]]}`),
